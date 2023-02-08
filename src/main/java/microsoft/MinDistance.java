@@ -38,8 +38,10 @@ package microsoft;
  */
 public class MinDistance {
     public static void main(String[] args) {
-        System.out.println(new MinDistance().minDistance("horse", "ros"));
-        System.out.println(new MinDistance().minDistance1("horse", "ros"));
+        System.out.println(new MinDistance().minDistance("intention"
+                ,"execution"));
+        System.out.println(new MinDistance().minDistance1("intention"
+                ,"execution"));
     }
 
     public int minDistance(String word1, String word2) {
@@ -64,10 +66,13 @@ public class MinDistance {
      * dp[i][j]表示从S1的(0,i)的子串转换为S2的(0,j)的子串需要的最少操作数
      * dp[i][j] 怎么来？
      *
-     * 1、dp[i-1][j-1]：
-     * 2、dp[i-1][j]
-     * 3、dp[i][j-1]
-     *
+     * 1、dp[i][j] = dp[i-1][j-1] ：word1.charAt(i - 1) == word2.charAt(j - 1)时，dp[i][j] = dp[i-1][j-1]。
+     * 2、dp[i][j] = dp[i-1][j-1] + 1 ：dp[i-1][j-1]表示 S1的(0,i - 1)的子串转换为S2的(0,j - 1)的子串需要的最少操作数，此时S1的(0,i - 1)的子串转换为S2的(0,j - 1)后，
+     *      只需要将S1的第i个字符更换为S2的第j个字符，即在dp[i-1][j-1]基础上增加一次替换操作，即可得到dp[i][j]。
+     * 3、dp[i][j] = dp[i-1][j] + 1 ：dp[i-1][j]表示 S1的(0,i - 1)的子串转换为S2的(0,j)的子串需要的最少操作数，此时S1的(0,i - 1)的子串转换为S2的(0,j)的子串，
+     *      只需要将转换后的字符剔除最后一个字符，即在dp[i-1][j]基础上增加一次删除操作，即可得到dp[i][j]。
+     * 4、dp[i][j] = dp[i][j-1] + 1 ：dp[i][j-1]表示 S1的(0,i)的子串转换为S2的(0,j - 1)的子串需要的最少操作数，此时S1的(0,i)的子串转换为S2的(0,j - 1)的子串，
+     *      只需要将在转换后的字符末尾，加上S2的第j个字符，即在dp[i][j-1]基础上增加一次插入操作，即可得到dp[i][j]。
      *
      * @param word1
      * @param word2
@@ -79,24 +84,24 @@ public class MinDistance {
         int[][] dp = new int[m+1][n+1];
 
         int tmp = 1;
-        while (tmp < n) {
+        while (tmp <= n) {
             dp[0][tmp] = tmp;
             tmp++;
         }
 
         tmp = 1;
-        while (tmp < m) {
+        while (tmp <= m) {
             dp[tmp][0] = tmp;
             tmp++;
         }
 
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
-                dp[i][j] = Math.min(Math.min(dp[i - 1][j - 1], dp[i - 1][j]), dp[i][j-1]) + 1;
+                if (word1.charAt(i - 1) == word2.charAt(j - 1)) dp[i][j] = dp[i - 1][j - 1];
+                else dp[i][j] = Math.min(Math.min(dp[i - 1][j - 1], dp[i - 1][j]), dp[i][j-1]) + 1;
             }
         }
 
         return dp[m][n];
-
     }
 }
