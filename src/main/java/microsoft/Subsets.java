@@ -32,6 +32,8 @@ public class Subsets {
         System.out.println(new Subsets().subsets1(new int[]{1, 2, 3}, 2));
         System.out.println(new Subsets().subsets(new int[]{1, 2, 3}));
         System.out.println(new Subsets().subsets2(new int[]{1, 2, 3}));
+        System.out.println(new Subsets().subsets3(new int[]{1, 2, 3}));
+
     }
 
     /**

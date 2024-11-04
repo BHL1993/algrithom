@@ -1,33 +1,35 @@
 package microsoft;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.alibaba.fastjson.JSON;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.util.*;
 
 /**
  * 电话号码的字母组合
- * 
+ * <p>
  * 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。
- * 
+ * <p>
  * 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
- * 
+ * <p>
  * 示例 1：
- * 
+ * <p>
  * 输入：digits = "23"
  * 输出：["ad","ae","af","bd","be","bf","cd","ce","cf"]
  * 示例 2：
- * 
+ * <p>
  * 输入：digits = ""
  * 输出：[]
  * 示例 3：
- * 
+ * <p>
  * 输入：digits = "2"
  * 输出：["a","b","c"]
- * 
- * 
+ * <p>
+ * <p>
  * 提示：
- * 
+ * <p>
  * 0 <= digits.length <= 4
  * digits[i] 是范围 ['2', '9'] 的一个数字。
  *
@@ -97,6 +99,19 @@ public class LetterCombinations {
     }
 
     public static void main(String[] args) {
-        System.out.println(new LetterCombinations().letterCombinations("23"));
+        List<String> list2 = Arrays.asList("12-911-914-23928", "12-911-914-23937", "12-911-914-23935", "12-911-914-23938");
+
+        List<String> list3 = Arrays.asList("炸锅", "电烧烤炉", "油炸锅", "扒炉",
+                "爬炉", "锅具", "锅", "烤面筋机",
+                "烧烤架", "燃气扒炉炸炉一体机设备", "烧烤炉子", "关东煮的锅",
+                "茶炉", "煎饼机", "手抓饼炉", "关东煮燃气炉");
+        List<String> ret = new ArrayList<>();
+        for (String cate : list3) {
+            for (String add : list2) {
+                ret.add(cate + "-" + add);
+            }
+        }
+
+        System.out.println(JSON.toJSONString(ret));
     }
 }

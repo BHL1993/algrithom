@@ -1,21 +1,18 @@
 package sort;
 
+import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+
 /**
  * @author ：BaiHailong
  * @date ：Created in 2022/8/12 9:53 上午
  */
 public class Client {
     public static void main(String[] args) {
-        String s0 = "kvill";
-        String s1 = new String("kvill");
-        String s2 = new String("kvill");
-        System.out.println(s0 == s1); //false
-        s1.intern();
-        s2 = s2.intern(); //把常量池中“kvill”的引用赋给s2
-        System.out.println(s0 == s1); //false
-        System.out.println(s0 == s1.intern()); //true
-        System.out.println(s0 == s2);//true
 
 
+        System.out.println("000000000000000000000000010000000200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001".charAt(143));
     }
 }
